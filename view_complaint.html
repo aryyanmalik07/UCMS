@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Complaint</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        body{
+            background:#f5f7fb;
+        }
+
+        .card{
+            border:none;
+            border-radius:20px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .badge{
+            font-size:14px;
+            padding:10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <div class="card p-5">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h2>Complaint Details</h2>
+
+            {% if session["role"] == "admin" %}
+                <a href="/admin" class="btn btn-dark">
+                    Back
+                </a>
+            {% else %}
+                <a href="/staff" class="btn btn-dark">
+                    Back
+                </a>
+            {% endif %}
+
+        </div>
+
+        <hr>
+
+        <h4 class="mb-3">
+            {{ complaint[2] }}
+        </h4>
+
+        <p>
+            <strong>Student:</strong>
+            {{ complaint[1] }}
+        </p>
+
+        <p>
+            <strong>Department:</strong>
+            {{ complaint[4] }}
+        </p>
+
+        <p>
+            <strong>Priority:</strong>
+
+            {% if complaint[5] == "High" %}
+                <span class="badge bg-danger">
+                    High
+                </span>
+
+            {% elif complaint[5] == "Medium" %}
+                <span class="badge bg-warning text-dark">
+                    Medium
+                </span>
+
+            {% else %}
+                <span class="badge bg-secondary">
+                    Low
+                </span>
+            {% endif %}
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+
+            {% if complaint[6] == "Resolved" %}
+                <span class="badge bg-success">
+                    Resolved
+                </span>
+
+            {% elif complaint[6] == "In Progress" %}
+                <span class="badge bg-primary">
+                    In Progress
+                </span>
+
+            {% else %}
+                <span class="badge bg-warning text-dark">
+                    Pending
+                </span>
+            {% endif %}
+        </p>
+
+        <p>
+            <strong>Assigned Staff:</strong>
+            {{ complaint[7] }}
+        </p>
+
+        <p>
+            <strong>Submitted At:</strong>
+            {{ complaint[8] }}
+        </p>
+
+        <hr>
+
+        <h5>Description</h5>
+
+        <div class="p-4 bg-light rounded">
+
+            {{ complaint[3] }}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

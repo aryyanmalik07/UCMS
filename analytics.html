@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analytics - UCMS</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            background: #f5f6fa;
+        }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+        }
+
+        canvas {
+            max-height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="/admin">UCMS Analytics</a>
+    <a href="/admin" class="btn btn-light btn-sm">Back</a>
+</nav>
+
+<div class="container mt-4">
+
+    <h3>System Analytics 📊</h3>
+
+    <!-- STATUS CARDS -->
+    <div class="row g-4 mb-3">
+
+        <div class="col-md-4">
+            <div class="card p-3 text-center">
+                <h5>Total Complaints</h5>
+                <h2>{{ total }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3 text-center bg-warning">
+                <h5>Pending</h5>
+                <h2>{{ pending }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3 text-center bg-primary text-white">
+                <h5>In Progress</h5>
+                <h2>{{ in_progress }}</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RESOLVED -->
+    <div class="row g-4 mb-3">
+        <div class="col-md-4">
+            <div class="card p-3 text-center bg-success text-white">
+                <h5>Resolved</h5>
+                <h2>{{ resolved }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRIORITY -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-4">
+            <div class="card p-3 text-center bg-danger text-white">
+                <h5>High Priority</h5>
+                <h2>{{ high }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3 text-center bg-info text-white">
+                <h5>Medium Priority</h5>
+                <h2>{{ medium }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3 text-center bg-secondary text-white">
+                <h5>Low Priority</h5>
+                <h2>{{ low }}</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CHARTS -->
+<div class="row mt-5">
+
+    <!-- 🔵 BAR CHART FIRST -->
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h5 class="text-center">Complaint Status</h5>
+            <canvas id="statusChart"></canvas>
+        </div>
+    </div>
+
+    <!-- 🔴 DOUGHNUT CHART SECOND -->
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h5 class="text-center">Priority Distribution</h5>
+            <canvas id="priorityChart"></canvas>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<!-- CHART SCRIPT -->
+<script>
+
+    // 🔥 DOUGHNUT CHART (MODERN)
+    const priorityChart = new Chart(document.getElementById('priorityChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['High', 'Medium', 'Low'],
+            datasets: [{
+                data: [{{ high }}, {{ medium }}, {{ low }}],
+                backgroundColor: ['#ff4d4d', '#36cfc9', '#8c8c8c'],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            cutout: '60%',
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+    // 🔥 BAR CHART
+    const statusChart = new Chart(document.getElementById('statusChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Pending', 'In Progress', 'Resolved'],
+            datasets: [{
+                label: 'Complaints',
+                data: [{{ pending }}, {{ in_progress }}, {{ resolved }}],
+                backgroundColor: ['#ffc107', '#1677ff', '#52c41a'],
+                borderRadius: 10
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>S\
