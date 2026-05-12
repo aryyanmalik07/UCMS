@@ -1,11 +1,11 @@
 # UCMS - University Complaint Management System
 
 ## Project Members
-- Ahsan Faraz     FA24-BSE-002
-- Aryaan Ali       FA24-BSE-004
-- Muhammad Saqib  FA24-BSE-027
-- Haroon Ali.     FA24-BSE-125
-- Muhammad Nabeel FA24-BSE-137
+- Ahsan Faraz     
+- Aryaan Ali       
+- Muhammad Saqib  
+- Haroon Ali     
+- Muhammad Nabeel Qureshi
   
 
 
