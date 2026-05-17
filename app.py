@@ -14,7 +14,7 @@ app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 
 # YOUR GMAIL
-app.config['MAIL_USERNAME'] = 'aryyanmalik07@gmail.com'
+app.config['MAIL_USERNAME'] = 'ucms@gmail.com'
 
 # YOUR APP PASSWORD
 app.config['MAIL_PASSWORD'] = 'pgyn dgcl gwpp dshx'
